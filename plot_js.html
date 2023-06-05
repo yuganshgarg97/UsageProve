@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<header>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<header>
+
+<body>
+    <div id = "list">
+        <h3>
+            System Name : <iframe src="uname.txt" frameborder="0" height="40" width="95%" style="font-size: 80%;"></iframe>
+            Hardware Name :<iframe src="hardwarename.txt" frameborder="0" height="40" width="95%" style="font-size: 80%;"></iframe>
+            Operating System: <iframe src="os.txt" frameborder="0" height="40" width="95%" style="font-size: 80%;"></iframe>
+        </h3>
+    </div>
+    
+    <div id="cpu" style="width:100%;max-width:700px"></div>
+    <script>
+        async function getNumbers(file) {
+            var result = await fetch(file)
+            var text = await result.text()
+            var bruh = String(text).split('\n')
+            return bruh.map(a => parseFloat(a))
+        }
+
+        getNumbers('cpu_used.txt').then(rArray => {
+            console.log(rArray);
+            //
+            var xArray = ["CPU Used", "CPU Idle"];
+            var yArray = [];
+            yArray.push(rArray[0]);
+            yArray.push(100-rArray[0]);
+            console.log(yArray);
+
+            var layout = {
+                title: "CPU LOAD"
+            };
+            var data = [{
+                labels: xArray,
+                values: yArray,
+                type: "pie"
+            }];
+            Plotly.newPlot("cpu", data, layout);
+
+        });
+    </script>
+    <div id="hardd" style="width:100%;max-width:700px"></div>
+    <script>
+        async function getNumbers(file) {
+            var result = await fetch(file)
+            var text = await result.text()
+            var bruh = String(text).split('\n')
+            return bruh.map(a => parseFloat(a))
+        }
+
+        getNumbers('hdused.txt').then(rArray => {
+            console.log(rArray);
+            //
+            var xArray = ["Storage Used", "Storage Idle"];
+            var yArray = [];
+            yArray.push(rArray[0]);
+            yArray.push(100-rArray[0]);
+            console.log(yArray);
+
+            var layout = {
+                title: "STORAGE USED"
+            };
+            var data = [{
+                labels: xArray,
+                values: yArray,
+                type: "pie"
+            }];
+            Plotly.newPlot("hardd", data, layout);
+
+        });
+    </script>
+    <div id="mem" style="width:100%;max-width:700px"></div>
+    <script>
+        async function getNumbers(file) {
+            var result = await fetch(file)
+            var text = await result.text()
+            var bruh = String(text).split('\n')
+            return bruh.map(a => parseFloat(a))
+        }
+
+        getNumbers('memory_used.txt').then(rArray => {
+            console.log(rArray);
+            //
+            var xArray = ["Memory Used", "Memory Idle"];
+            var yArray = [];
+            yArray.push(rArray[0]);
+            yArray.push(100-rArray[0]);
+            console.log(yArray);
+
+            var layout = {
+                title: "MEMORY LOAD"
+            };
+            var data = [{
+                labels: xArray,
+                values: yArray,
+                type: "pie"
+            }];
+            Plotly.newPlot("mem", data, layout);
+
+        });
+    </script>
+    <div id="swap" style="width:100%;max-width:700px"></div>
+    <script>
+        async function getNumbers(file) {
+            var result = await fetch(file)
+            var text = await result.text()
+            var bruh = String(text).split('\n')
+            return bruh.map(a => parseFloat(a))
+        }
+
+        getNumbers('swap_used.txt').then(rArray => {
+            console.log(rArray);
+            //
+            var xArray = ["SWAP Used", "SWAP Idle"];
+            var yArray = [];
+            yArray.push(rArray[0]);
+            yArray.push(100-rArray[0]);
+            console.log(yArray);
+
+            var layout = {
+                title: "SWAP USED"
+            };
+            var data = [{
+                labels: xArray,
+                values: yArray,
+                type: "pie"
+            }];
+            Plotly.newPlot("swap", data, layout);
+
+        });
+    </script>
+</body>
+
+</html>
